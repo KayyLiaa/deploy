@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Identifikasi Daun Kentang</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="navbar">Sistem Identifikasi Daun Kentang</div>
+
+    <div class="content">
+      <div class="form-container">
+        <form method="post" enctype="multipart/form-data">
+          <label for="file">Pilih Gambar Daun Kentang:</label>
+          <input type="file" name="file" id="file" accept="image/*" />
+          <button type="submit">Analisis</button>
+        </form>
+      </div>
+    </div>
+
+    {% if filename %}
+    <h2>Hasil Analisis</h2>
+
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Gambar Daun</th>
+          <th>Kategori Kesegaran</th>
+          <th>Akurasi Prediksi</th>
+        </tr>
+        <tr>
+          <td><img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Hasil Upload" width="150" /></td>
+          <td><strong>{{ result }}</strong></td>
+          <td><strong>{{ accuracy }}%</strong></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="chart-container">
+      <h2>Grafik Performa Model</h2>
+      <img src="{{ url_for('static', filename='images/training_results.png') }}" alt="Grafik Performa Model" />
+    </div>
+    {% endif %}
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
